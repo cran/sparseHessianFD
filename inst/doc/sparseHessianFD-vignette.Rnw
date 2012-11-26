@@ -1,0 +1,4 @@
+%\VignetteIndexEntry{Using the sparseHessianFD package}
+\documentclass{article}
+\begin{document}
+\end{document}
