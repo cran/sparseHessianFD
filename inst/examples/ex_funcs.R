@@ -1,7 +1,7 @@
 ## ex_funcs.R -- this file is part of sparseHessianFD, a contributed package
 ## for the R statistical programming platform.
 ##
-## Copyright (C) 2012 Michael Braun
+## Copyright (C) 2013 Michael Braun
 
 ## Functions to compute objective function, gradient, and Hessian for
 ## example.R

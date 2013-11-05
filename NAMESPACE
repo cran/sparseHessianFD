@@ -1,4 +1,4 @@
 useDynLib(sparseHessianFD)
 exportPattern("^[[:alpha:]]+")
-import(Rcpp)
+import(Rcpp, Matrix, RcppEigen, methods)
 exportClasses(sparseHessianObj)

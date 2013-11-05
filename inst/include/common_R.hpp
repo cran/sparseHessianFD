@@ -2,7 +2,7 @@
 // common_R.hpp -- this file is part of sparseHessianFD, a contributed package
 // for the R statistical programming platform.
 //
-// Copyright (C) 2012 Michael Braun.  See LICENSE file for details.
+// Copyright (C) 2013 Michael Braun.  See LICENSE file for details.
 
 
 #ifndef COMMON_R

@@ -1,6 +1,6 @@
 ## matrices.R --   Part of the sparseHessianFD package for the R programming language.
 ##
-## Copyright (C) 2012 Michael Braun
+## Copyright (C) 2013 Michael Braun
 
 
 
@@ -9,7 +9,6 @@ Sym.CSC.to.Matrix <- function(H,nvars) {
 ## H is a list of data stored in compressed sparse column (CSC) format
 ## returns a sparse Matrix object
 
-  require(Matrix)
   M <- new("dsCMatrix", i = H$indrow, p = H$jpntr, x = H$vals, Dim=c(nvars, nvars),uplo="L")
   return(M)
 

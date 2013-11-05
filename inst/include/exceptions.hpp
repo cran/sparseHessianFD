@@ -1,6 +1,6 @@
 // exceptions.hpp.  Part of the sparseHessianFD package for the R programming language.
 //
-// Copyright (C) 2012 Michael Braun.  See LICENSE file for details.
+// Copyright (C) 2013 Michael Braun.  See LICENSE file for details.
 
 #ifndef MY_EXCEPTION
 #define MY_EXCEPTION

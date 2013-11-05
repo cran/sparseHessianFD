@@ -1,6 +1,6 @@
 ## classes.R --   Part of the sparsehessianFD package for the R programming language.
 ##
-## Copyright (C) 2012 Michael Braun
+## Copyright (C) 2013 Michael Braun
 
 
 setClass("sparseHessianObj", representation(pointer = "externalptr") )
