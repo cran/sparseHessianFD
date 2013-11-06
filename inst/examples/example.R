@@ -1,23 +1,17 @@
 ## example.R -- this file is part of sparseHessianFD, a contributed package
 ## for the R statistical programming platform.
 ##
-## Copyright (C) 2012 Michael Braun.  See LICENSE file for details.
+## Copyright (C) 2013 Michael Braun.  See LICENSE file for details.
 
 ## this file demonstrates how to create a sparseHessianObj object, and use
 ## it to compute the Hessian of the function, given the gradient and sparsity
 ## structure.
 
 
-rm(list=ls())
-gc()
-
 library(plyr)
-library(Matrix)
-library(mvtnorm)
 library(Rcpp)
 library(RcppEigen)
 library(sparseHessianFD)
-library(numDeriv)
 
 source("ex_funcs.R")
 
