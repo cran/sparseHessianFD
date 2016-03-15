@@ -1,7 +1,11 @@
-## ----, echo=FALSE--------------------------------------------------------
-require(Matrix)
-require(sparseHessianFD)
-N <- 6
+## ----setup1, echo=FALSE, cache=FALSE----------------------------------------------------
+suppressPackageStartupMessages(require(Matrix))
+knitr::render_sweave()
+knitr::opts_chunk$set(prompt=TRUE, cache=TRUE)
+options(replace.assign=TRUE, width=90,prompt="R> ")
+
+## ----setup2, echo=FALSE-----------------------------------------------------------------
+N <- 5
 k <- 2
 nv1 <- (N+1)*k
 nels1 <- nv1^2
@@ -14,68 +18,70 @@ nnz2 <- (Q+1)*k^2 + 2*Q*k^2
 nnz2LT <- (Q+1)*k*(k+1)/2 + Q*k^2
 options(scipen=999)
 
-## ----, echo=FALSE--------------------------------------------------------
-M <- as(kronecker(diag(N),matrix(1,k,k)),"lMatrix")
-M <- rBind(M, Matrix(TRUE,k,N*k))
-M <- cBind(M, Matrix(TRUE, k*(N+1), k))
-print(M)
+## ----blockarrow, echo=FALSE-------------------------------------------------------------
+Mat <- as(kronecker(diag(N),matrix(1,k,k)),"sparseMatrix")
+Mat <- rBind(Mat, Matrix(1,k,N*k))
+Mat <- cBind(Mat, Matrix(1, k*(N+1), k))
+printSpMatrix(as(Mat,"nMatrix"))
 
-## ----, echo=FALSE--------------------------------------------------------
-M <- as(kronecker(matrix(1,k,k), diag(N)),"lMatrix")
-M <- rBind(M, Matrix(TRUE,k,N*k))
-M <- cBind(M, Matrix(TRUE, k*(N+1), k))
-print(M)
+## ----banded, echo=FALSE-----------------------------------------------------------------
+Mat <- kronecker(Matrix(1,k,k), diag(N))
+Mat <- rBind(Mat, Matrix(1,k,N*k))
+Mat <- cBind(Mat, Matrix(1, k*(N+1), k))
+printSpMatrix(as(Mat,"nMatrix"))
 
-## ----, collapse=TRUE-----------------------------------------------------
+## ---------------------------------------------------------------------------------------
+library("sparseHessianFD")
+bd <- kronecker(diag(3), matrix(TRUE,2,2))
+Mat <- as(bd, "nMatrix")
+printSpMatrix(tril(Mat))
+mc <- Matrix.to.Coord(tril(Mat))
+mc
+
+## ---------------------------------------------------------------------------------------
+pattern <- sparseMatrix(i=mc$rows, j=mc$cols)
+printSpMatrix(pattern)
+
+## ----eval=FALSE-------------------------------------------------------------------------
+#  obj <- sparseHessianFD(x, fn, gr, rows, cols, ...)
+
+## ----eval=FALSE-------------------------------------------------------------------------
+#  f <- obj$fn(x)          ## returns numeric
+#  df <- obj$gr(x)         ## returns numeric vector
+#  hess <- obj$hessian(x)  ## returns dgCMatrix
+#  fngr <- obj$fngr(x)     ## returns list
+#  fngrhs <- obj$fngrhs(x) ## returns list
+
+## ----binaryInit-------------------------------------------------------------------------
 set.seed(123)
-data(binary)
+data("binary")
 str(binary)
-N <- length(binary$Y)
-k <- NROW(binary$X)
+N <- length(binary[["Y"]])
+k <- NROW(binary[["X"]])
+T <- binary[["T"]]
 nvars <- as.integer(N*k + k)
-P <- rnorm(nvars) ## random starting values
 priors <- list(inv.Sigma = rWishart(1,k+5,diag(k))[,,1],
                inv.Omega = diag(k))
 
+## ----trueValues-------------------------------------------------------------------------
+P <- rnorm(nvars)
+order.row <- FALSE
+true.f <- binary.f(P, binary, priors, order.row=order.row)
+true.grad <- binary.grad(P, binary, priors, order.row=order.row)
+true.hess <- binary.hess(P, binary, priors, order.row=order.row)
 
-## ----, echo=FALSE--------------------------------------------------------
-options(scipen=-999)
-
-## ----, tidy=TRUE---------------------------------------------------------
-true.f <- binary.f(P, binary, priors, order.row=FALSE)
-true.grad <- binary.grad(P, binary, priors, order.row=FALSE)
-true.hess <- binary.hess(P, binary, priors, order.row=FALSE)
-
-## ----, collapse=TRUE-----------------------------------------------------
+## ----binaryRowsCols---------------------------------------------------------------------
 pattern <- Matrix.to.Coord(tril(true.hess))
-str(pattern)	    	    
+str(pattern)
 
-## ------------------------------------------------------------------------
-obj <- sparseHessianFD.new(P, binary.f, binary.grad,
-       rows=pattern$rows, cols=pattern$cols,
-       data=binary, priors=priors,
-       order.row=FALSE)
-
-## ------------------------------------------------------------------------
+## ----usingSparseHessianFD---------------------------------------------------------------
+obj <- sparseHessianFD(P, fn=binary.f, gr=binary.grad,
+       rows=pattern[["rows"]], cols=pattern[["cols"]],
+       data=binary, priors=priors, order.row=order.row)
 f <- obj$fn(P)
-gr <- obj$gr(P)
-hs <- obj$hessian(P)
-
-## ----, collapse=TRUE-----------------------------------------------------
-
-
 all.equal(f, true.f)
+gr <- obj$gr(P)
 all.equal(gr, true.grad)
-all.equal(hs, true.hess)	      	     	     
-
-## ----, echo=FALSE--------------------------------------------------------
-options(scipen=0)
-
-## ----, tidy=TRUE---------------------------------------------------------
-library(numDeriv)
-hess.time <- system.time(H1 <- obj$hessian(P))	  
-fd.time <- system.time(H2 <- hessian(obj$fn, P))
-H2 <- drop0(H2, 1e-7) ## treat values < 1e-8 as zero
-print(hess.time)
-print(fd.time)	   
+hs <- obj$hessian(P)
+all.equal(hs, true.hess)
 
