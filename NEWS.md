@@ -1,5 +1,13 @@
 # NEWS file for sparseHessianFD package 
 
+## VERSION 0.3.2
+
+*  Added implementation of the complex step method.
+
+*  Revised vignette.
+
+*  The 'direct' argument to the sparseHessianFD initializer was removed (defunct).
+
 ## VERSION 0.3.0
 
 *  An even more major rewrite of the package.  All ACM code was
