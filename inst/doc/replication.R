@@ -80,7 +80,7 @@ run_test_fig4 <- function(NkT, reps=50, order.row=FALSE) {
 
   obj <- sparseHessianFD(X, F$fn, F$gr, pat$rows, pat$cols, complex=TRUE)
   colors <- obj$partition()
-  perm <- obj$get_perm()
+  perm <- obj$get_perm()S
   ncolors <- length(unique(colors))
   nvars <- N*k+k
 
@@ -215,9 +215,7 @@ tab4 <-  mutate(runs_tab4, ms=bench.time/1000000) %>%
     group_by(N, k, method, M, stat)  %>%
     summarize(mean=mean(time), sd=sd(time)) %>%
     gather(stat2, value, c(mean,sd)) %>%
-    ##  summarize(mean=mean(time)) %>%
-  ##  gather(stat2, value, mean) %>%
-  dcast(N+k+M~stat+method+stat2,value.var="value") %>%
+    dcast(N+k+M~stat+method+stat2,value.var="value") %>%
     arrange(k,N)
 
 save(runs_tab4, tab4, D2, file="repl.Rdata")

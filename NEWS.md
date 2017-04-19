@@ -1,5 +1,12 @@
 # NEWS file for sparseHessianFD package 
 
+## VERSION 0.3.2.1
+
+*  Updated version as accepted at Journal of Statistical Software
+
+*  Explicit registration of native routines, as required by R 3.4.0.
+
+
 ## VERSION 0.3.2
 
 *  Added implementation of the complex step method.

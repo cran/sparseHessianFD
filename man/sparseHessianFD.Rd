@@ -86,6 +86,7 @@ Hessian.  The value corresponds to the "color" for that column.}
 
 \item{\code{perm,invperm}}{Permutation vector and its inverse}
 }}
+
 \section{Methods}{
 
 \describe{
@@ -118,6 +119,7 @@ Hessian.  The value corresponds to the "color" for that column.}
 
 \item{\code{pointers(out.index1 = index1)}}{Return list with indices (idx) and pointers (pntr) for sparsity pattern of the compressed sparse Hessian.  Since the Hessian is symmetric, the indices and pointers for row-oriented and column-oriented storage patterns are the same.}
 }}
+
 \examples{
 ## Log posterior density of hierarchical binary choice model. See vignette.
 set.seed(123)
@@ -142,4 +144,3 @@ df <- obj$gr(P) ## gradient
 fdf <- obj$fngr(P) ## list of obj function and gradient
 fdfhs <- obj$fngrhs(P) ## list of obj function, gradient and Hessian.
 }
-

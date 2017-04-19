@@ -1,4 +1,13 @@
+
+
 NEWS FILE FOR SPARSEHESSIANFD PACKAGE
+
+
+VERSION 0.3.2.1
+
+-   Updated version as accepted at Journal of Statistical Software
+
+-   Explicit registration of native routines, as required by R 3.4.0.
 
 
 VERSION 0.3.2
@@ -7,7 +16,8 @@ VERSION 0.3.2
 
 -   Revised vignette.
 
--   The 'direct' argument to the sparseHessianFD initializer was removed (defunct).
+-   The 'direct' argument to the sparseHessianFD initializer was removed
+    (defunct).
 
 
 VERSION 0.3.0

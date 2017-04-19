@@ -52,7 +52,7 @@ printSpMatrix(pattern)
 #  fngr <- obj$fngr(x)
 #  fngrhs <- obj$fngrhs(x)
 
-## ----binaryInit------------------------------------------------------------
+## ----binaryInit, tidy=FALSE------------------------------------------------
 set.seed(123)
 data("binary")
 str(binary)
@@ -61,7 +61,7 @@ k <- NROW(binary[["X"]])
 T <- binary[["T"]]
 nvars <- as.integer(N * k + k)
 priors <- list(inv.Sigma = rWishart(1, k + 5, diag(k))[,,1],
-  inv.Omega = diag(k))
+   inv.Omega = diag(k))
 
 ## ----trueValues------------------------------------------------------------
 P <- rnorm(nvars)
@@ -74,10 +74,10 @@ true.hess <- binary.hess(P, binary, priors, order.row=order.row)
 pattern <- Matrix.to.Coord(tril(true.hess))
 str(pattern)
 
-## ----usingSparseHessianFD1-------------------------------------------------
+## ----usingSparseHessianFD1, tidy=FALSE-------------------------------------
 obj <- sparseHessianFD(P, fn=binary.f, gr=binary.grad,
-  rows=pattern[["rows"]], cols=pattern[["cols"]],
-  data=binary, priors=priors, order.row=order.row)
+   rows=pattern[["rows"]], cols=pattern[["cols"]],
+   data=binary, priors=priors, order.row=order.row)
 f <- obj$fn(P)
 identical(f, true.f)
 gr <- obj$gr(P)
@@ -90,11 +90,11 @@ options(scipen=0)
 hs <- obj$hessian(P)
 mean(abs(hs-true.hess))/mean(abs(hs))
 
-## --------------------------------------------------------------------------
+## ----tidy=FALSE------------------------------------------------------------
 obj2 <- sparseHessianFD(P, fn=binary.f, gr=binary.grad,
-  rows=pattern[["rows"]], cols=pattern[["cols"]],
-  complex=TRUE,
-  data=binary, priors=priors, order.row=order.row)
+   rows=pattern[["rows"]], cols=pattern[["cols"]],
+   complex=TRUE,
+   data=binary, priors=priors, order.row=order.row)
 hs2 <- obj2$hessian(P)
 mean(abs(hs2-true.hess))/mean(abs(hs2))
 
