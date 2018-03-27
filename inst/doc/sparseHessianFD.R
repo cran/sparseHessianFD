@@ -20,14 +20,14 @@ options(scipen=999)
 
 ## ----blockarrow, echo=FALSE------------------------------------------------
 Mat <- as(kronecker(diag(N), matrix(1, k, k)),"sparseMatrix")
-Mat <- rBind(Mat, Matrix(1, k, N*k))
-Mat <- cBind(Mat, Matrix(1, k * (N+1), k))
+Mat <- rbind(Mat, Matrix(1, k, N*k))
+Mat <- cbind(Mat, Matrix(1, k * (N+1), k))
 printSpMatrix(as(Mat,"nMatrix"))
 
 ## ----banded, echo=FALSE----------------------------------------------------
 Mat <- kronecker(Matrix(1, k, k), diag(N))
-Mat <- rBind(Mat, Matrix(1, k, N * k))
-Mat <- cBind(Mat, Matrix(1, k * (N + 1), k))
+Mat <- rbind(Mat, Matrix(1, k, N * k))
+Mat <- cbind(Mat, Matrix(1, k * (N + 1), k))
 printSpMatrix(as(Mat,"nMatrix"))
 
 ## --------------------------------------------------------------------------
