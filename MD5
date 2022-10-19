@@ -1,7 +1,7 @@
-a6600ed200071b10da89ae05c8c4e9e6 *DESCRIPTION
+1d09c6914fcea938bdd2d4488161baf7 *DESCRIPTION
 053a8df156c548197e1fa27c4fa9048f *NAMESPACE
-38a11cc75f23ed1f963573e5a7e1cf17 *NEWS
-873b9307ab8630daca5af13db0fdb085 *NEWS.md
+4d7a508c8f8e244d96fb1d4b8c01a49e *NEWS
+5a4f3b60a16f1a3b824138c68528468b *NEWS.md
 518a56394c22577895aca94da912cbfd *R/RcppExports.R
 a414ee601f95421e13ddbbe6dabeb9cf *R/binary-data.R
 a5edfa39477af64f3e4eb16edce27f9c *R/binary.R
@@ -17,9 +17,9 @@ a28438bb22cabce7c10b79bb5eb8ad4e *data/binary_small.rda
 38e4934d5afe2373162c2228961af4b1 *data/binary_super.rda
 7c88d039f91fdb0230c600a84ee50aed *inst/CITATION
 4653e10655bdfd39d3c29976a3dc976a *inst/doc/replication.R
-dada5850765a1dee0cd2bb357d7974c3 *inst/doc/sparseHessianFD.R
-3eb7be41b34014dce4dfd80d76ebe861 *inst/doc/sparseHessianFD.Rnw
-ff74c428f6fd417d7dda8f79675a6595 *inst/doc/sparseHessianFD.pdf
+31caf78ffb8b907bafc04aebb635234f *inst/doc/sparseHessianFD.R
+e2569497cc202c4a2e0fecb1907456d6 *inst/doc/sparseHessianFD.Rnw
+db8c504de737a3aa0efda9ed55a0077b *inst/doc/sparseHessianFD.pdf
 0f6c5b2aa347c8b098a2d113311e2efb *inst/doc/vignette_tab4.Rdata
 f09030727365a64eadafe8d0bc394a44 *man/Coord.to.Pointers.Rd
 5ede38384737ea1ac8817c406972708f *man/Matrix.to.Coord.Rd
@@ -45,6 +45,6 @@ aa851e26d8dc0b4bb6bd4e6163f7e04a *tests/testthat/test_complex.R
 11bd286eed65df55065a034dc9981057 *tests/testthat/test_matrices.R
 cdd450c6fb419058acfc52ea7cac7efe *vignettes/fig_timings.pdf
 4653e10655bdfd39d3c29976a3dc976a *vignettes/replication.R
-3eb7be41b34014dce4dfd80d76ebe861 *vignettes/sparseHessianFD.Rnw
+e2569497cc202c4a2e0fecb1907456d6 *vignettes/sparseHessianFD.Rnw
 fbf173f9ac5bb549e0673901e20035bc *vignettes/sparseHessianFD.bib
 0f6c5b2aa347c8b098a2d113311e2efb *vignettes/vignette_tab4.Rdata
